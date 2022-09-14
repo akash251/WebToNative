@@ -71,6 +71,7 @@ dependencies {
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
     debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_version"
 
+    implementation 'com.google.code.gson:gson:2.8.9'
 
     //navigation in compose
     ksp 'io.github.raamcosta.compose-destinations:ksp:1.5.14-beta'

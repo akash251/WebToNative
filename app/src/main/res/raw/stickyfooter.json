@@ -1,0 +1,40 @@
+{
+  "stickyFooter": {
+    "data": [
+      {
+        "tabs": [
+          {
+            "link": "https://www.webtonative.com",
+            "label": "Home",
+            "icon": "home"
+          },
+          {
+            "icon": "showcase",
+            "label": "Showcase",
+            "link": "https://www.webtonative.com/showcase"
+          },
+          {
+            "link": "https://www.webtonative.com/features",
+            "label": "Features",
+            "icon": "features"
+          },
+          {
+            "icon": "faq",
+            "link": "https://www.webtonative.com/faq",
+            "label": "FAQ"
+          },
+          {
+            "label": "Pricing",
+            "link": "https://www.webtonative.com/pricing",
+            "icon": "pricing"
+          }
+        ],
+        "textColor": "0xff000000",
+        "fontFamily": "Arial",
+        "bgColor": "0xffffffff",
+        "height": 56,
+        "fontSize": 9
+      }
+    ]
+  }
+}

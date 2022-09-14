@@ -1,6 +1,7 @@
 package com.akash.webtonative
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
@@ -15,10 +16,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.core.view.WindowCompat
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import androidx.navigation.compose.rememberNavController
+import com.akash.webtonative.domain.model.StickyFooterData
 import com.akash.webtonative.presentation.NavGraphs
 import com.akash.webtonative.presentation.bottom_bar_nav.BottomNavBar
 import com.akash.webtonative.ui.theme.WebToNativeTheme
+import com.google.gson.Gson
 import com.ramcosta.composedestinations.DestinationsNavHost
+import org.json.JSONObject
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,12 +33,25 @@ class MainActivity : ComponentActivity() {
             val navController = rememberNavController()
             val systemUiController = rememberSystemUiController()
             val useDarkIcons = MaterialTheme.colors.isLight
+
             LaunchedEffect(key1 = true) {
                 systemUiController.setStatusBarColor(
                     color = Color.Transparent,
                     darkIcons = useDarkIcons
                 )
             }
+
+            //Reading from json file
+            val stickyFooterJsonData = applicationContext.resources.openRawResource(
+                applicationContext.resources.getIdentifier(
+                    "stickyfooter",
+                    "raw",applicationContext.packageName
+                )
+            ).bufferedReader().use { it.readText() }
+
+            val gson = Gson()
+            val stickyFooterOutputJsonData = gson.fromJson(stickyFooterJsonData, StickyFooterData::class.java)
+
 
             WebToNativeTheme {
                 Surface(modifier = Modifier.fillMaxSize(),
@@ -43,6 +60,7 @@ class MainActivity : ComponentActivity() {
                         bottomBar = {
                             BottomNavBar(
                                 navController = navController,
+                                stickyData = stickyFooterOutputJsonData.stickyFooter.data[0]
                             )
                         },
                         modifier = Modifier.systemBarsPadding()
