@@ -10,9 +10,8 @@ import com.ramcosta.composedestinations.annotation.Destination
 
 @Destination
 @Composable
-fun FaqsScreen() {
+fun FaqsScreen(faqPageUrl:String) {
 
-    val faqPageUrl = "https://www.webtonative.com/faq"
 
     AndroidView(factory = {
         WebView(it).apply {

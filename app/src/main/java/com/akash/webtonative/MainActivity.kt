@@ -19,9 +19,12 @@ import androidx.navigation.compose.rememberNavController
 import com.akash.webtonative.domain.model.StickyFooterData
 import com.akash.webtonative.presentation.NavGraphs
 import com.akash.webtonative.presentation.bottom_bar_nav.BottomNavBar
+import com.akash.webtonative.presentation.destinations.*
+import com.akash.webtonative.presentation.screens.*
 import com.akash.webtonative.ui.theme.WebToNativeTheme
 import com.google.gson.Gson
 import com.ramcosta.composedestinations.DestinationsNavHost
+import com.ramcosta.composedestinations.manualcomposablecalls.composable
 import org.json.JSONObject
 
 class MainActivity : ComponentActivity() {
@@ -52,6 +55,7 @@ class MainActivity : ComponentActivity() {
             val gson = Gson()
             val stickyFooterOutputJsonData = gson.fromJson(stickyFooterJsonData, StickyFooterData::class.java)
 
+            val stickyData = stickyFooterOutputJsonData.stickyFooter.data[0]
 
             WebToNativeTheme {
                 Surface(modifier = Modifier.fillMaxSize(),
@@ -60,7 +64,7 @@ class MainActivity : ComponentActivity() {
                         bottomBar = {
                             BottomNavBar(
                                 navController = navController,
-                                stickyData = stickyFooterOutputJsonData.stickyFooter.data[0]
+                                stickyData = stickyData
                             )
                         },
                         modifier = Modifier.systemBarsPadding()
@@ -70,7 +74,35 @@ class MainActivity : ComponentActivity() {
                             navGraph = NavGraphs.root,
                             modifier = Modifier
                                 .padding(it),
-                        )
+                        ){
+                            composable(HomeScreenDestination){
+                                HomeScreen(
+                                    homePageUrl = stickyData.tabs[0].link
+                                )
+                            }
+                            composable(FeaturesScreenDestination){
+                                FeaturesScreen(
+                                    featuresPageUrl = stickyData.tabs[2].link
+                                )
+                            }
+                            composable(PricingScreenDestination){
+                                PricingScreen(
+                                    pricingPageUrl = stickyData.tabs[4].link
+                                )
+                            }
+                            composable(ShowCaseScreenDestination){
+                                ShowCaseScreen(
+                                   showCasePageUrl  = stickyData.tabs[1].link
+                                )
+                            }
+                            composable(FaqsScreenDestination){
+                                FaqsScreen(
+                                    faqPageUrl = stickyData.tabs[3].link
+                                )
+                            }
+
+
+                        }
                     }
                 }
             }

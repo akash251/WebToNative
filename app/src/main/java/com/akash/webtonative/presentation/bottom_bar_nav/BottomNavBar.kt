@@ -32,7 +32,7 @@ fun BottomNavBar(
     val currentDestination: com.akash.webtonative.presentation.destinations.Destination? =
         navController.currentBackStackEntryAsState().value?.appDestination()
 
-    val destinations:List<DirectionDestinationSpec> = listOf(
+    val destinations = listOf(
         HomeScreenDestination,
         ShowCaseScreenDestination,
         FeaturesScreenDestination,
@@ -58,7 +58,7 @@ fun BottomNavBar(
             BottomNavigationItem(
                 selected = currentDestination == destinations[index],
                 onClick = {
-                    navController.navigate(destinations[index], fun NavOptionsBuilder.() {
+                    navController.navigate(destinations[index].route, fun NavOptionsBuilder.() {
                         popUpTo(navController.graph[HomeScreenDestination.route].id) {
                             saveState = true
                         }

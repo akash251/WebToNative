@@ -11,9 +11,8 @@ import com.ramcosta.composedestinations.annotation.RootNavGraph
 @RootNavGraph(start = true)
 @Destination
 @Composable
-fun HomeScreen() {
+fun HomeScreen( homePageUrl:String = "") {
 
-    val homePageUrl = "https://www.webtonative.com"
 
     AndroidView(factory = {
         WebView(it).apply {

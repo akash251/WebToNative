@@ -10,9 +10,8 @@ import com.ramcosta.composedestinations.annotation.Destination
 
 @Destination
 @Composable
-fun PricingScreen() {
+fun PricingScreen(pricingPageUrl:String) {
 
-    val pricingPageUrl = "https://www.webtonative.com/pricing"
 
     AndroidView(factory = {
         WebView(it).apply {

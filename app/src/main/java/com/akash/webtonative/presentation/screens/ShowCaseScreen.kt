@@ -9,8 +9,7 @@ import com.ramcosta.composedestinations.annotation.Destination
 
 @Destination
 @Composable
-fun ShowCaseScreen() {
-    val showCasePageUrl = "https://www.webtonative.com/showcase"
+fun ShowCaseScreen(showCasePageUrl:String) {
 
     AndroidView(factory = {
         WebView(it).apply {
