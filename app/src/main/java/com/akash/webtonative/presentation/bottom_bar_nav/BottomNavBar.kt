@@ -59,9 +59,6 @@ fun BottomNavBar(
                 selected = currentDestination == destinations[index],
                 onClick = {
                     navController.navigate(destinations[index].route, fun NavOptionsBuilder.() {
-                        popUpTo(navController.graph[HomeScreenDestination.route].id) {
-                            saveState = true
-                        }
                         launchSingleTop = true
                         restoreState = true
                     })

@@ -1,7 +1,6 @@
 package com.akash.webtonative
 
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
@@ -14,7 +13,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.core.view.WindowCompat
-import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import androidx.navigation.compose.rememberNavController
 import com.akash.webtonative.domain.model.StickyFooterData
 import com.akash.webtonative.presentation.NavGraphs
@@ -22,14 +20,15 @@ import com.akash.webtonative.presentation.bottom_bar_nav.BottomNavBar
 import com.akash.webtonative.presentation.destinations.*
 import com.akash.webtonative.presentation.screens.*
 import com.akash.webtonative.ui.theme.WebToNativeTheme
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.google.gson.Gson
 import com.ramcosta.composedestinations.DestinationsNavHost
 import com.ramcosta.composedestinations.manualcomposablecalls.composable
-import org.json.JSONObject
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         WindowCompat.setDecorFitsSystemWindows(window, false)
         setContent {
 
@@ -77,7 +76,8 @@ class MainActivity : ComponentActivity() {
                         ){
                             composable(HomeScreenDestination){
                                 HomeScreen(
-                                    homePageUrl = stickyData.tabs[0].link
+                                    homePageUrl = stickyData.tabs[0].link,
+                                    closeApp = {exitApp()}
                                 )
                             }
                             composable(FeaturesScreenDestination){
@@ -107,6 +107,10 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
+    }
+
+    private fun exitApp(){
+        this.finish()
     }
 }
 
