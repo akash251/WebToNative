@@ -12,6 +12,9 @@ import androidx.compose.ui.viewinterop.AndroidView
 import com.akash.webtonative.util.BackPressHandler
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootNavGraph
+import java.util.Timer
+import java.util.concurrent.TimeUnit
+import kotlin.concurrent.schedule
 
 @RootNavGraph(start = true)
 @Destination
@@ -24,7 +27,7 @@ fun HomeScreen(
     val context = LocalContext.current
 
     var backPressedCount by remember{ mutableStateOf(0) }
-
+    println("count 1= $backPressedCount")
 
 
 
@@ -36,15 +39,24 @@ fun HomeScreen(
         ).show()
     }
 
+    if (backPressedCount > 0) {
+        Timer().schedule(TimeUnit.SECONDS.toSeconds(5000)) {
+            backPressedCount = 0
+        }
+    }
+
 
     BackPressHandler(onBackPressed = {
         backPressedCount += it
+
         if (backPressedCount == 1){
             showToast()
         }
         if (backPressedCount >= 2){
             closeApp()
         }
+
+
     })
 
     AndroidView(factory = {
